@@ -1,0 +1,280 @@
+body {
+    font-family: 'Cairo', Arial, sans-serif;
+    /* خلفية متدرجة شفافة */
+    background: linear-gradient(135deg, #e0eafc99 0%, #cfdef399 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* شرح: تنسيق العنوان الرئيسي في الصفحة مع إضافة ظل وحركة دخول */
+h1 {
+    text-align: center;
+    color: #1a237e;
+    margin-top: 30px;
+    font-size: 2.5em;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 6px #9993;
+    animation: slideDown 1.2s cubic-bezier(.77,0,.175,1);
+}
+
+/* شرح: حركة نزول للعنصر (يستخدم مع العنوان الرئيسي) */
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-40px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+/* شرح: حاوية أقسام اللغات وتوزيعها على شكل شبكة */
+.languages-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 40px auto 0 auto;
+    padding: 30px;
+    background: #fff9;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px #0002;
+    position: relative;
+    z-index: 1;
+}
+
+/* شرح: تنسيق صندوق كل قسم لغة (خلفية، ظل، حركة دخول) */
+.language-section {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px #0001;
+    padding: 24px 18px 18px 18px;
+    margin-bottom: 0;
+    opacity: 0;
+    transform: translateX(70px) scale(0.97);
+    transition: 
+        opacity 0.9s cubic-bezier(.77,0,.175,1),
+        transform 0.9s cubic-bezier(.77,0,.175,1);
+    position: relative;
+    z-index: 2;
+}
+/* شرح: عند ظهور القسم (إضافة كلاس visible) يظهر مع حركة */
+.language-section.visible {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    animation: fadeInRight 1s cubic-bezier(.77,0,.175,1);
+}
+
+/* شرح: حركة دخول للصندوق من اليمين */
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(90px) scale(0.95);}
+    to { opacity: 1; transform: translateX(0) scale(1);}
+}
+
+/* شرح: تنسيق عنوان كل لغة (حجم الخط، لون، حركة بوب) */
+.language-title {
+    font-size: 1.5em;
+    color: #1565c0;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: titlePop 0.8s cubic-bezier(.77,0,.175,1);
+}
+
+/* شرح: حركة تكبير وتصغير للعنوان عند ظهوره */
+@keyframes titlePop {
+    0% { opacity:0; transform: scale(0.7);}
+    60% { opacity:1; transform: scale(1.15);}
+    100% { opacity:1; transform: scale(1);}
+}
+
+/* شرح: تنسيق صورة اللغة (دائرة، ظل، تأثير عند المرور) */
+.language-img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 2px 6px #0002;
+    border: 2px solid #90caf9;
+    background: #fff;
+    transition: transform 0.33s, box-shadow 0.33s;
+}
+/* شرح: تأثير نبض للصورة عند وضع المؤشر عليها */
+.language-img:hover {
+    animation: pulse 0.8s;
+    transform: scale(1.12) rotate(-7deg);
+    box-shadow: 0 0 16px #2196f3aa;
+}
+
+/* شرح: حركة نبض للصورة */
+@keyframes pulse {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.15);}
+    100% {transform: scale(1);}
+}
+
+/* شرح: تنسيق فئة الروابط (عنوان فئة وروابطها) */
+.links-category {
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+/* شرح: إزالة الخط السفلي من آخر فئة روابط */
+.links-category:last-child {
+    border-bottom: none;
+}
+
+/* شرح: تنسيق عنوان كل فئة روابط وحركة دخوله */
+.category-title {
+    font-size: 1.07em;
+    color: #444;
+    margin-bottom: 8px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    position: relative;
+    animation: fadeCat 1.2s cubic-bezier(.77,0,.175,1);
+}
+
+/* شرح: حركة ظهور عنوان الفئة من اليمين */
+@keyframes fadeCat {
+    from {opacity: 0; left: 25px;}
+    to {opacity: 1; left: 0;}
+}
+
+/* شرح: تنسيق قائمة الروابط داخل الفئة */
+.links-list {
+    padding-right: 20px;
+    margin: 0;
+}
+/* شرح: تنسيق عنصر كل رابط (ظهور تدريجي وحركة للأعلى) */
+.links-list li {
+    margin-bottom: 6px;
+    list-style-type: circle;
+    font-size: 1em;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: itemAppear 0.75s cubic-bezier(.77,0,.175,1) forwards;
+}
+/* شرح: تأخير ظهور عناصر القائمة تدريجياً */
+.links-list li:nth-child(1) { animation-delay: 0.18s;}
+.links-list li:nth-child(2) { animation-delay: 0.27s;}
+.links-list li:nth-child(3) { animation-delay: 0.36s;}
+.links-list li:nth-child(4) { animation-delay: 0.45s;}
+.links-list li:nth-child(5) { animation-delay: 0.54s;}
+
+/* شرح: حركة ظهور عناصر القائمة */
+@keyframes itemAppear {
+    to { opacity: 1; transform: translateY(0);}
+}
+
+/* شرح: تنسيق الروابط داخل القائمة (لون وتأثير عند المرور) */
+.links-list li a {
+    color: #00695c;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.25s, transform 0.25s;
+    position: relative;
+    display: inline-block;
+}
+.links-list li a:hover {
+    color: #f44336;
+    text-decoration: underline;
+    letter-spacing: 1px;
+    transform: scale(1.09) translateX(-6px);
+}
+
+/* شرح: تأثير ظل وتكبير لصندوق القسم عند المرور عليه */
+.language-section:hover {
+    box-shadow: 0 8px 32px #1976d23a;
+    transform: scale(1.04);
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+/* شرح: استجابة التصميم للشاشات الصغيرة (جوال، تابلت) */
+@media (max-width: 800px) {
+    .languages-container {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+    .language-section {
+        max-width: 96vw;
+    }
+}
+
+/* --------- الوضع الليلي --------- */
+/* شرح: تغيير خلفية وألوان الصفحة عند تفعيل الوضع الليلي */
+body.dark-mode {
+    background: linear-gradient(135deg, #222 0%, #333 100%);
+    color: #f3f3f3;
+}
+body.dark-mode h1 {
+    color: #82b1ff;
+    text-shadow: 0 2px 12px #0006;
+}
+body.dark-mode .languages-container {
+    background: #222d;
+    box-shadow: 0 8px 32px #000a;
+}
+body.dark-mode .language-section {
+    background: #282828;
+    color: #fff;
+    box-shadow: 0 4px 16px #0005;
+}
+body.dark-mode .category-title {
+    color: #b2ebf2;
+}
+body.dark-mode .links-list li a {
+    color: #80cbc4;
+}
+body.dark-mode .links-list li a:hover {
+    color: #ffab91;
+}
+
+/* زر الوضع الليلي */
+/* شرح: تنسيق زر تفعيل أو إلغاء الوضع الليلي (تثبيت الزر في أعلى الصفحة) */
+.dark-btn {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 99;
+    padding: 9px 18px;
+    font-size: 1em;
+    background: #222;
+    color: #fff;
+    border-radius: 22px;
+    border: none;
+    box-shadow: 0 2px 12px #0004;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.dark-btn:hover {
+    background: #1565c0;
+    color: #fffde7;
+}
+
+/* --------- خلفية فيديو وتظليل --------- */
+/* شرح: جعل الفيديو في خلفية الصفحة بالكامل خلف كل العناصر */
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -2;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+/* شرح: طبقة تظليل شفافة فوق الفيديو لزيادة وضوح المحتوى */
+.video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(20, 20, 30, 0.5); /* لون التظليل وشفافيته */
+    z-index: -1;
+    pointer-events: none;
+}
